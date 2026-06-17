@@ -2,46 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<div class="container">
     <h1>Todo List</h1>
-    
-    <div class="form">
-        <input type="text" id="todo-input" placeholder="Buy Model S">
-        <button id="add-btn">Add</button>
-    </div>
+
+    <form class="todo-form">
+        <input type="text" placeholder="Buy Model S">
+        <button type="submit">Add</button>
+    </form>
 
     <hr>
 
-    <div id="todo-grid">
-        <div class="card">
-            <div class="card-text">Buy milk :)</div>
-            <div class="card-time">18:44</div>
-            <button class="del-btn">x</button>
+    <div class="todo-list">
+        <div class="todo-card">
+            <div class="todo-header">
+                <span>Buy milk :)</span>
+                <button class="delete">✖</button>
+            </div>
+            <span class="time">18:44</span>
         </div>
 
-        <div class="card">
-            <div class="card-text">End the project</div>
-            <div class="card-time">18:44</div>
-            <button class="del-btn">x</button>
+        <div class="todo-card">
+            <div class="todo-header">
+                <span>End the project</span>
+                <button class="delete">✖</button>
+            </div>
+            <span class="time">18:44</span>
         </div>
 
-        <div class="card">
-            <div class="card-text">Call mom</div>
-            <div class="card-time">18:44</div>
-            <button class="del-btn">x</button>
+        <div class="todo-card">
+            <div class="todo-header">
+                <span>Call mom</span>
+                <button class="delete">✖</button>
+            </div>
+            <span class="time">18:44</span>
         </div>
 
-        <div class="card">
-            <div class="card-text">Sleep 10 hrs</div>
-            <div class="card-time">18:44</div>
-            <button class="del-btn">x</button>
+        <div class="todo-card">
+            <div class="todo-header">
+                <span>Sleep 10 hrs</span>
+                <button class="delete">✖</button>
+            </div>
+            <span class="time">18:44</span>
         </div>
     </div>
+</div>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
+
 </body>
 </html>

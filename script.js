@@ -1,25 +1,72 @@
-const input = document.getElementById('todo-input');
-const addBtn = document.getElementById('add-btn');
-const grid = document.getElementById('todo-grid');
+const form = document.querySelector(".todo-form")
+const list = document.querySelector(".todo-list")
 
-addBtn.onclick = () => {
-    const text = input.value.trim();
-    if (text === '') return;
+let todos = []
 
-    const cardHTML = `
-        <div class="card">
-            <div class="card-text">${text}</div>
-            <div class="card-time">18:44</div>
-            <button class="del-btn">x</button>
+form.onsubmit = (e) => {
+    e.preventDefault()
+
+    let input = form.querySelector("input")
+
+    todos.push(
+        {
+            name: input.value,
+            time: new Date().toLocaleTimeString([], { timeStyle: 'short' })
+        }
+    )
+
+    console.log(todos);
+    render()
+}
+
+function addCard(item, i) {
+    const card = document.createElement("div")
+    card.classList.add("todo-card")
+
+    card.innerHTML = `
+        <div class="todo-header">
+            <span>${item.name}</span>
+            <button class="edit" onclick="editCard(${i})">✏️</button>
+            <button class="delete" onclick="removeCard(${i})">✖</button>
         </div>
-    `;
+        <span class="time">${item.time}</span>
+    `
 
-    grid.innerHTML += cardHTML; 
-    input.value = null;        
-};
+    list.append(card)
+}
 
-grid.onclick = (e) => {
-    if (e.target.classList.contains('del-btn')) {
-        e.target.parentElement.remove(); 
+function render() {
+    const htmlCards = list.querySelectorAll(".todo-card")
+    if (todos.length === 0 && htmlCards.length > 0) {
+        
+        htmlCards.forEach((card) => {
+            let name = card.querySelector(".todo-header span").innerText
+            let time = card.querySelector(".time").innerText
+            
+            todos.push({
+                name: name,
+                time: time
+            })
+        })
     }
-};
+
+    list.innerHTML = ""
+    todos.forEach((todo, i) => addCard(todo, i))
+}
+
+render()
+
+
+function removeCard(i) {
+    todos.splice(i, 1)
+    render()
+}
+
+function editCard(i) {
+    let newName = prompt("Измените: ", todos[i].name)
+    
+    if (newName !== null && newName.trim() !== "") {
+        todos[i].name = newName.trim()
+        render()
+    }
+}
